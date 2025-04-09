@@ -1,0 +1,5 @@
+nojobs api documentation
+========================
+
+/api -> Documentation (current page)
+/api/up -> App status (response code with a message)
