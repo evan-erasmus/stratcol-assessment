@@ -1,6 +1,6 @@
 FROM postgres:14-alpine
 
-EXPOSE 5432
+EXPOSE ${DB_PORT}
 
 # RUN mkdir -p /docker-entrypoint-initdb.d
 
