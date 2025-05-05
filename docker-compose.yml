@@ -63,7 +63,7 @@ services:
     networks:
       - app-network
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "${DB_PORT:-5432}:${DB_PORT:-5432}"
 
   redis:
     build:
@@ -78,7 +78,7 @@ services:
     networks:
       - app-network
     ports:
-      - "${REDIS_PORT:-6379}:6379"
+      - "${REDIS_PORT:-6379}:${REDIS_PORT:-6379}"
 
 networks:
   app-network:
