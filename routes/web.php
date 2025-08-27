@@ -1,16 +1,28 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+    use App\Models\Currency;
+    use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Route::get('/', function () {
-    return view('welcome');
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    return redirect()->route('login');
 })->name('home');
 
-Route::view('{app?}', 'dashboard')
+Route::view('/dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
-    ->where('app', '(app|dashboard|home)')
     ->name('dashboard');
+
+Route::get('/exchange', function() {
+        $currencies = Currency::all();
+        $currency_count = $currencies->count();
+
+        return view('exchange', compact('currencies', 'currency_count'));
+    })
+    ->middleware(['auth', 'verified'])
+    ->name('exchange');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
