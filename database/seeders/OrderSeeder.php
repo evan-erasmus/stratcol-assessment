@@ -41,6 +41,7 @@ class OrderSeeder extends Seeder
                 'status' => 'cancelled',
                 'total_amount' => 300.00,
                 'currency_id' => 3,
+                'discount_percentage' => 2.0,
                 'return_amount' => 300.00,
                 'exchange_rate' => 0.0527032,
                 'placed_at' => now()->subDays(2),

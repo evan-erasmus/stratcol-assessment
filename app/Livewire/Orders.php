@@ -11,8 +11,19 @@ class Orders extends Component
 
     public function mount()
     {
+        $this->loadOrders();
+    }
+
+    public function render()
+    {
+        return view('livewire.orders');
+    }
+
+    public function loadOrders()
+    {
         $this->orders = auth()->user()
             ->orders()
+            ->latest()
             ->get()
             ->map(function ($order) {
                 $order->currency = CurrencyModel::find($order->currency_id);
@@ -20,10 +31,5 @@ class Orders extends Component
                 return $order;
             })
             ->toArray();
-    }
-
-    public function render()
-    {
-        return view('livewire.orders');
     }
 }

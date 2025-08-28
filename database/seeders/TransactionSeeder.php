@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Account as AccountModel;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
-use App\Models\Account as AccountModel;
 
 class TransactionSeeder extends Seeder
 {
@@ -19,21 +19,21 @@ class TransactionSeeder extends Seeder
                 'account_id' => 1,
                 'amount' => 5000.00,
                 'type' => 'credit',
-                'description' => 'Deposit to account ' . AccountModel::find(1)->account_number,
+                'description' => 'Deposit to account '.AccountModel::find(1)->account_number,
             ],
             [
                 'reference' => 'TXN'.uniqid(),
                 'account_id' => 1,
                 'amount' => 5000.00,
                 'type' => 'credit',
-                'description' => 'Deposit to account ' . AccountModel::find(1)->account_number,
+                'description' => 'Deposit to account '.AccountModel::find(1)->account_number,
             ],
             [
                 'reference' => 'TXN'.uniqid(),
                 'account_id' => 2,
                 'amount' => 2500.00,
                 'type' => 'credit',
-                'description' => 'Deposit to account ' . AccountModel::find(2)->account_number,
+                'description' => 'Deposit to account '.AccountModel::find(2)->account_number,
             ],
         ];
 

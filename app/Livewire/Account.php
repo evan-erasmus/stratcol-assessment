@@ -11,6 +11,8 @@ class Account extends Component
 
     public ?array $selectedAccount = null;
 
+    protected $listeners = ['accountBalanceUpdated' => 'refreshAccount'];
+
     public ?int $selectedAccountId = null;
 
     public function mount()
@@ -29,6 +31,8 @@ class Account extends Component
             })->toArray();
         $this->selectedAccount = $this->accounts[0] ?? null;
         $this->selectedAccountId = $this->selectedAccount['id'] ?? null;
+
+        session(['selected_account_id' => $this->selectedAccountId]);
     }
 
     public function updatedSelectedAccountId($accountId)
@@ -36,6 +40,7 @@ class Account extends Component
         $account = AccountModel::find($accountId);
 
         if ($account) {
+            $this->selectedAccountId = $accountId;
             $this->selectedAccount = [
                 'id' => $account->id,
                 'user_id' => $account->user_id,
@@ -47,6 +52,8 @@ class Account extends Component
 
             $this->dispatch('account-updated');
         }
+
+        session(['selected_account_id' => $this->selectedAccountId]);
     }
 
     public function refreshAccount()

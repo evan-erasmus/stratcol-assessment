@@ -19,27 +19,28 @@ class Order extends Model
         'status',
         'total_amount',
         'return_amount',
+        'discount_percentage',
         'exchange_rate',
         'placed_at',
     ];
 
-    public function currency(): BelongsTo
+    public function transaction(): BelongsTo
     {
-        return $this->belongsTo(Currency::class);
+        return $this->belongsTo(Transaction::class);
     }
 
     public function account(): BelongsTo
     {
-        return $this->transaction()->account();
+        return $this->transaction->account();
     }
 
     public function user(): BelongsTo
     {
-        return $this->account()->user();
+        return $this->transaction->account->user();
     }
 
-    public function transaction(): BelongsTo
+    public function currency(): BelongsTo
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsTo(Currency::class);
     }
 }

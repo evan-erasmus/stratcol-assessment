@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('symbol', 10);
             $table->decimal('surcharge_percentage', 15, 8)->default(0);
             $table->decimal('exchange_rate', 15, 8);
+            $table->decimal('discount_percentage', 15, 8)->default(0);
             $table->string('country_code_short')->nullable();
+            $table->boolean('should_notify')->default(false);
             $table->timestamps();
         });
     }

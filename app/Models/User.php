@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -61,20 +60,17 @@ class User extends Authenticatable
             ->implode('');
     }
 
-    public function orders(): HasManyThrough
+    public function orders()
     {
-        return $this->hasManyThrough(
-            Order::class,
-            Account::class,
-            'user_id',
-            'transaction_id',
-            'id',
-            'id'
-        );
+        return Order::whereHas('transaction', function ($query) {
+            $query->whereHas('account', function ($accountQuery) {
+                $accountQuery->where('user_id', $this->id);
+            });
+        });
     }
 
     public function accounts(): HasMany
     {
-        return $this->hasMany(Account::class, 'user_id');
+        return $this->hasMany(Account::class);
     }
 }

@@ -26,14 +26,21 @@ class Account extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function orders(): HasMany
-    {
-        return $this->hasMany(Order::class);
-    }
-
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasManyThrough(
+            Order::class,
+            Transaction::class,
+            'account_id',
+            'transaction_id',
+            'id',
+            'id'
+        );
     }
 
     public static function generateAccountNumber(): string

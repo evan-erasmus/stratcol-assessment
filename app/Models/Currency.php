@@ -18,5 +18,7 @@ class Currency extends Model
         'surcharge_percentage',
         'exchange_rate',
         'country_code_short',
+        'discount_percentage',
+        'should_notify',
     ];
 }

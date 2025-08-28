@@ -35,6 +35,12 @@ Route::get('/orders', function () {
     ->middleware(['auth', 'verified'])
     ->name('orders');
 
+Route::get('/orders/{currency}', function ($currency) {
+    return view('create-order', compact('currency'));
+})
+    ->middleware(['auth', 'verified'])
+    ->name('orders.create');
+
 Route::get('/account/{account_number}', function ($account_number) {
     $account = auth()->user()->accounts()
         ->where('account_number', $account_number)

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('status')->default('pending');
             $table->decimal('total_amount', 15, 8);
             $table->decimal('return_amount', 15, 8)->default(0);
+            $table->decimal('discount_percentage', 15, 8)->default(0);
             $table->decimal('exchange_rate', 15, 8);
             $table->timestamp('placed_at')->useCurrent();
             $table->timestamps();
