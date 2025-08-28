@@ -25,13 +25,23 @@ Route::get('/exchange', function () {
     ->middleware(['auth', 'verified'])
     ->name('exchange');
 
+Route::get('/orders', function () {
+    $orders = auth()->user()->orders()
+        ->get()
+        ->toArray();
+
+    return view('orders', compact('orders'));
+})
+    ->middleware(['auth', 'verified'])
+    ->name('orders');
+
 Route::get('/account/{account_number}', function ($account_number) {
     $account = auth()->user()->accounts()
         ->where('account_number', $account_number)
         ->firstOrFail()
         ->toArray();
 
-    if (!$account) {
+    if (! $account) {
         return redirect()->route('dashboard')->with('error', 'Account not found');
     }
 
@@ -48,4 +58,4 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

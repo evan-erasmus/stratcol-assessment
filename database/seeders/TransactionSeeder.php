@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Currency;
-use App\Models\Order;
 use App\Models\Transaction;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Account as AccountModel;
 
 class TransactionSeeder extends Seeder
 {
@@ -17,25 +15,25 @@ class TransactionSeeder extends Seeder
     {
         $transactions = [
             [
-                'reference' => 'TXN' . uniqid(),
+                'reference' => 'TXN'.uniqid(),
                 'account_id' => 1,
                 'amount' => 5000.00,
                 'type' => 'credit',
-                'description' => 'Deposit to account ACC123456',
+                'description' => 'Deposit to account ' . AccountModel::find(1)->account_number,
             ],
             [
-                'reference' => 'TXN' . uniqid(),
+                'reference' => 'TXN'.uniqid(),
                 'account_id' => 1,
                 'amount' => 5000.00,
                 'type' => 'credit',
-                'description' => 'Deposit to account ACC123456',
+                'description' => 'Deposit to account ' . AccountModel::find(1)->account_number,
             ],
             [
-                'reference' => 'TXN' . uniqid(),
+                'reference' => 'TXN'.uniqid(),
                 'account_id' => 2,
                 'amount' => 2500.00,
                 'type' => 'credit',
-                'description' => 'Deposit to account ACC654321',
+                'description' => 'Deposit to account ' . AccountModel::find(2)->account_number,
             ],
         ];
 

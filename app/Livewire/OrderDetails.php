@@ -4,23 +4,20 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class Transactions extends Component
+class OrderDetails extends Component
 {
-    public array $transactions = [];
+    public array $order = [];
 
     public function mount()
     {
-        $this->transactions = auth()->user()->accounts()
+        $this->order = auth()->user()->accounts()
             ->where('account_number', request()->route('account_number'))
             ->first()
-            ?->transactions()
-            ->latest()
-            ->get()
             ->toArray();
     }
 
     public function render()
     {
-        return view('livewire.transactions');
+        return view('livewire.order');
     }
 }

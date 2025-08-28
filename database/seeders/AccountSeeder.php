@@ -15,14 +15,14 @@ class AccountSeeder extends Seeder
         $accounts = [
             [
                 'user_id' => 1,
-                'account_number' => 'ACC123456',
-                'balance' => 10000.00,
+                'account_number' => Account::generateAccountNumber(),
+                'balance' => 0,
                 'status' => 'active',
             ],
             [
                 'user_id' => 1,
-                'account_number' => 'ACC654321',
-                'balance' => 2500.00,
+                'account_number' => Account::generateAccountNumber(),
+                'balance' => 0,
                 'status' => 'active',
             ],
         ];

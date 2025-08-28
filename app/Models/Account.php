@@ -35,4 +35,9 @@ class Account extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public static function generateAccountNumber(): string
+    {
+        return 'AC'.now()->format('Ymd').rand(1000, 9999);
+    }
 }

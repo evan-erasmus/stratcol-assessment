@@ -6,7 +6,7 @@
             <div class="gap-4 flex flex-col items-center justify-center">
                 <div class="mb-4">
                     <select wire:model.live="selectedAccountId"
-                            class="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white p-2">
+                            class="block w-full rounded-md border-zinc-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-white p-2">
                         @foreach($accounts as $account)
                             <option value="{{ $account['id'] }}">
                                 {{ $account['account_number'] }} - {{ ucfirst($account['status']) }}

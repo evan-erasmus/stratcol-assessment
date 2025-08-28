@@ -7,6 +7,7 @@ use Livewire\Component;
 class Currencies extends Component
 {
     public array $currencies = [];
+
     public function mount()
     {
         $this->currencies = \App\Models\Currency::get()->toArray();

@@ -38,7 +38,7 @@ class OrderSeeder extends Seeder
             [
                 'order_number' => 'ORD'.uniqid(),
                 'transaction_id' => null,
-                'status' => 'canceled',
+                'status' => 'cancelled',
                 'total_amount' => 300.00,
                 'currency_id' => 3,
                 'return_amount' => 300.00,
@@ -48,7 +48,7 @@ class OrderSeeder extends Seeder
             [
                 'order_number' => 'ORD'.uniqid(),
                 'transaction_id' => null,
-                'status' => 'canceled',
+                'status' => 'cancelled',
                 'total_amount' => 300.00,
                 'currency_id' => 4,
                 'return_amount' => 300.00,
@@ -61,7 +61,7 @@ class OrderSeeder extends Seeder
             $currency = Currency::where('id', $order['currency_id'])->first();
 
             Transaction::create([
-                'reference' => 'TXN' . uniqid(),
+                'reference' => 'TXN'.uniqid(),
                 'account_id' => $order['currency_id'] % 2 == 0 ? 2 : 1,
                 'amount' => $order['total_amount'],
                 'type' => 'debit',
@@ -73,6 +73,16 @@ class OrderSeeder extends Seeder
             Order::updateOrCreate(
                 $order
             );
+        }
+
+        foreach (Transaction::all() as $transaction) {
+            $account = $transaction->account()->first();
+
+            if ($transaction->type === 'credit') {
+                $account->update(['balance' => $account->balance += $transaction->amount]);
+            } else {
+                $account->update(['balance' => $account->balance -= $transaction->amount]);
+            }
         }
     }
 }
